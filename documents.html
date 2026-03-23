@@ -22,7 +22,7 @@
             overflow-x: hidden;
         }
 
-        /* ----- LOADER (elegant) ----- */
+        /* ========== FIXED LOADER - PROPERLY CENTERED ON ALL DEVICES ========== */
         .loader-wrapper {
             position: fixed;
             top: 0;
@@ -40,6 +40,18 @@
         .loader-wrapper.hidden {
             opacity: 0;
             visibility: hidden;
+        }
+
+        /* Loader container - properly centered using flex */
+        .loader-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
         }
 
         .loader-spinner {
@@ -77,59 +89,255 @@
             to { opacity: 1; transform: translateY(0);}
         }
 
-        /* header */
+        /* ========== REFINED HEADER WITH HAMBURGER MENU ========== */
         header {
-            background: #0a2a43;
-            color: white;
-            padding: 18px 40px;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 0 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0,0,0,0.02);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            border-bottom: 1px solid #eef2f8;
         }
 
         .logo-area {
             display: flex;
             align-items: center;
             gap: 12px;
+            padding: 14px 0;
         }
 
         .logo-area i {
-            font-size: 1.8rem;
-            color: #ffb347;
+            font-size: 1.7rem;
+            color: #1e4a6b;
+            background: #eef4ff;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
         }
 
-        header h1 {
-            font-size: 1.65rem;
+        .logo-area h1 {
+            font-size: 1.55rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #fff, #c9deed);
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #1a3e54, #0f2b3d);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .est-badge {
+            font-size: 0.65rem;
+            font-weight: 500;
+            background: #f0f4f9;
+            padding: 2px 8px;
+            border-radius: 30px;
+            color: #2c5a74;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        /* Hamburger button - visible on mobile */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: #1e4a6b;
+            cursor: pointer;
+            padding: 12px 8px;
+            transition: all 0.2s;
+            z-index: 1001;
+        }
+
+        .hamburger:hover {
+            color: #f5a623;
+        }
+
+        /* Navigation menu - desktop style */
+        .nav-menu {
+            display: flex;
+            align-items: center;
         }
 
         nav {
             display: flex;
-            gap: 28px;
+            gap: 6px;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
         nav a {
-            color: #eef3fc;
+            color: #2c3e50;
             text-decoration: none;
             font-weight: 500;
             font-size: 0.95rem;
-            transition: 0.2s;
-            padding-bottom: 4px;
-            border-bottom: 2px solid transparent;
+            padding: 8px 16px;
+            border-radius: 40px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        nav a:hover, nav a.active {
-            border-bottom-color: #ffb347;
+        nav a i {
+            font-size: 0.9rem;
+        }
+
+        nav a:hover {
+            background: #f1f5f9;
+            color: #1e4a6b;
+        }
+
+        nav a.active {
+            background: #1e4a6b;
             color: white;
+        }
+
+        .nav-cta {
+            background: #1e4a6b;
+            color: white !important;
+            margin-left: 4px;
+        }
+
+        .nav-cta:hover {
+            background: #0f3b54 !important;
+            transform: translateY(-1px);
+        }
+
+        /* Mobile responsive styles */
+        @media (max-width: 880px) {
+            header {
+                padding: 8px 20px;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: white;
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+                z-index: 1000;
+                padding: 80px 24px 40px;
+                display: block;
+                overflow-y: auto;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-menu nav {
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+            
+            .nav-menu nav a {
+                display: flex;
+                padding: 14px 20px;
+                font-size: 1rem;
+                text-align: left;
+                white-space: normal;
+                border-radius: 16px;
+                gap: 12px;
+            }
+            
+            .nav-menu nav a.active {
+                background: #1e4a6b;
+                color: white;
+            }
+            
+            .nav-menu nav a:hover {
+                background: #f1f5f9;
+            }
+            
+            /* Overlay when menu is open */
+            .menu-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+            
+            .menu-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            /* Close button inside mobile menu */
+            .close-menu {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: none;
+                border: none;
+                font-size: 1.8rem;
+                color: #1e4a6b;
+                cursor: pointer;
+                padding: 8px;
+                transition: all 0.2s;
+            }
+            
+            .close-menu:hover {
+                color: #f5a623;
+                transform: rotate(90deg);
+            }
+            
+            .logo-area h1 {
+                font-size: 1.3rem;
+            }
+            
+            .logo-area i {
+                width: 38px;
+                height: 38px;
+                font-size: 1.4rem;
+            }
+            
+            .est-badge {
+                font-size: 0.55rem;
+                padding: 2px 6px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 6px 16px;
+            }
+            
+            .logo-area h1 {
+                font-size: 1.1rem;
+            }
+            
+            .logo-area i {
+                width: 34px;
+                height: 34px;
+                font-size: 1.2rem;
+            }
         }
 
         /* hero section */
@@ -279,6 +487,25 @@
             font-size: 0.9rem;
         }
 
+        .contact-link-btn {
+            background: #0a2a43;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-link-btn:hover {
+            background: #134b6b;
+            transform: translateY(-2px);
+        }
+
         /* footer */
         footer {
             background: #0f1f2c;
@@ -336,16 +563,6 @@
         }
 
         @media (max-width: 720px) {
-            header {
-                flex-direction: column;
-                gap: 14px;
-                padding: 16px 20px;
-            }
-            nav {
-                gap: 18px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
             .docs-hero h2 {
                 font-size: 2.2rem;
             }
@@ -359,33 +576,54 @@
                 bottom: 20px;
                 right: 20px;
             }
+            .info-note {
+                flex-direction: column;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
 
-<!-- Loader -->
+<!-- FIXED LOADER - PROPERLY CENTERED ON ALL DEVICES -->
 <div class="loader-wrapper" id="globalLoader">
-    <div style="text-align: center;">
+    <div class="loader-container">
         <div class="loader-spinner"></div>
         <div class="loader-text">DV5 PROJECTS<br><span style="font-size:0.7rem;">Loading resources & documents</span></div>
     </div>
 </div>
 
 <div class="page-content">
+    <!-- REFINED HEADER WITH HAMBURGER MENU -->
     <header>
         <div class="logo-area">
             <i class="fas fa-hard-hat"></i>
-            <h1>DV5 PROJECTS</h1>
+            <h1>DV5 PROJECTS <span class="est-badge">est. 2017</span></h1>
         </div>
-        <nav>
-            <a href="index.html"><i class="fas fa-home"></i> Home</a>
-            <a href="about.html">About</a>
-            <a href="services.html">Services</a>
-            <a href="projects.html">Projects</a>
-            <a href="contact.html">Contact</a>
-            <a href="#" class="active">Documents</a>
-        </nav>
+        
+        <!-- Hamburger Button (Mobile) -->
+        <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <!-- Mobile Menu Overlay -->
+        <div class="menu-overlay" id="menuOverlay"></div>
+        
+        <!-- Navigation Menu (Desktop + Mobile) -->
+        <div class="nav-menu" id="navMenu">
+            <button class="close-menu" id="closeMenuBtn" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
+            <nav>
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+                <a href="services.html"><i class="fas fa-tools"></i> Services</a>
+                <a href="projects.html"><i class="fas fa-briefcase"></i> Projects</a>
+                <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="#" class="active"><i class="fas fa-file-alt"></i> Documents</a>
+                <a href="contact.html" class="nav-cta"><i class="fas fa-paper-plane"></i> Quote</a>
+            </nav>
+        </div>
     </header>
 
     <div class="docs-hero">
@@ -452,7 +690,7 @@
         <div class="info-note">
             <i class="fas fa-envelope-open-text"></i>
             <p>Need a specific document or notarized version? <strong>Reach out to us</strong> and we'll assist promptly. For tender submissions, request official stamped copies via email.</p>
-            <a href="contact.html" style="background:#0a2a43; color:white; padding:8px 20px; border-radius:40px; text-decoration:none; font-size:0.8rem; font-weight:500;"><i class="fas fa-paper-plane"></i> Contact us</a>
+            <a href="contact.html" class="contact-link-btn"><i class="fas fa-paper-plane"></i> Contact us</a>
         </div>
     </section>
 
@@ -478,7 +716,7 @@
 </a>
 
 <script>
-    // Loader: smooth hide after full load + minimum display time
+    // ========== FIXED LOADER - PROPERLY CENTERED ==========
     (function() {
         const loader = document.getElementById('globalLoader');
         const start = Date.now();
@@ -512,6 +750,92 @@
             }, delay);
         }
     })();
+
+    // ========== HAMBURGER MENU LOGIC ==========
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navMenu = document.getElementById('navMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const closeMenuBtn = document.getElementById('closeMenuBtn');
+
+    function openMenu() {
+        navMenu.classList.add('active');
+        menuOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+        navMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    if (hamburgerBtn) {
+        hamburgerBtn.addEventListener('click', openMenu);
+    }
+    if (closeMenuBtn) {
+        closeMenuBtn.addEventListener('click', closeMenu);
+    }
+    if (menuOverlay) {
+        menuOverlay.addEventListener('click', closeMenu);
+    }
+
+    // Close menu when a nav link is clicked
+    const navLinks = document.querySelectorAll('.nav-menu nav a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            closeMenu();
+            
+            // For external page links, allow normal navigation
+            if (href && (href.includes('.html') || href === '/' || href === '')) {
+                return;
+            }
+            
+            // For anchor links on same page
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                const targetElement = document.querySelector(href);
+                if (targetElement) {
+                    setTimeout(() => {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                }
+            }
+            
+            // Update active class
+            navLinks.forEach(navLink => navLink.classList.remove('active'));
+            link.classList.add('active');
+        });
+    });
+
+    // Ensure active class is set for current page (Documents page)
+    const currentPath = window.location.pathname;
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === '#' || href === 'documents.html' || (href === '' && document.title.includes('Documents'))) {
+            link.classList.add('active');
+        } else if (href === 'documents.html' && currentPath.includes('documents')) {
+            link.classList.add('active');
+        }
+    });
+
+    // Handle download button clicks - prevent default for demo (since files may not exist)
+    const downloadBtns = document.querySelectorAll('.btn-download');
+    downloadBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href && href.includes('.pdf')) {
+                // Allow download to proceed - files would be served from actual server
+                // This just ensures the link works naturally
+                return;
+            }
+            // For demo purposes if files don't exist, show info
+            if (!href || href === '#') {
+                e.preventDefault();
+                alert('Document download will be available soon. Please contact us for immediate access.');
+            }
+        });
+    });
 </script>
 </body>
 </html>
