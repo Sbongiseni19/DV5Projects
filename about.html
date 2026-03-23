@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>About DV5 Projects | Trusted Contracting & Project Solutions</title>
+    <!-- Google Fonts: Inter + Font Awesome 6 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            color: #1e2a3e;
+            background: #fefefe;
+            overflow-x: hidden;
+        }
+
+        /* ---------- LOADER (elegant) ---------- */
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a2a43;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1), visibility 0.6s;
+        }
+
+        .loader-wrapper.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-circle {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 20px;
+            border: 5px solid rgba(255,255,255,0.2);
+            border-top: 5px solid #ffb347;
+            border-right: 5px solid #4aa3df;
+            border-radius: 50%;
+            animation: spin 0.85s linear infinite;
+        }
+
+        .loader-content h3 {
+            color: white;
+            font-weight: 500;
+            letter-spacing: 1px;
+            font-size: 1.3rem;
+        }
+
+        .loader-content p {
+            color: #cbd5e6;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* page fade-in */
+        .page-container {
+            opacity: 0;
+            animation: pageFade 0.75s ease forwards;
+            animation-delay: 0.1s;
+        }
+
+        @keyframes pageFade {
+            from { opacity: 0; transform: translateY(12px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        /* header */
+        header {
+            background: #0a2a43;
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-area i {
+            font-size: 1.8rem;
+            color: #ffb347;
+        }
+
+        header h1 {
+            font-size: 1.65rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #c9deed);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav {
+            display: flex;
+            gap: 28px;
+        }
+
+        nav a {
+            color: #eef3fc;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            padding-bottom: 4px;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav a:hover, nav a.active {
+            border-bottom-color: #ffb347;
+            color: white;
+        }
+
+        /* hero about section */
+        .about-hero {
+            background: linear-gradient(112deg, #f0f5fa 0%, #ffffff 100%);
+            text-align: center;
+            padding: 70px 24px 60px;
+            border-bottom: 1px solid #e6edf2;
+        }
+
+        .about-hero h2 {
+            font-size: 2.9rem;
+            font-weight: 800;
+            color: #0a2a43;
+            margin-bottom: 20px;
+        }
+
+        .about-hero p {
+            max-width: 760px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: #2c4b66;
+        }
+
+        /* general sections */
+        section {
+            padding: 70px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.1rem;
+            font-weight: 700;
+            margin-bottom: 48px;
+            color: #0a2a43;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 4px;
+            background: #ffb347;
+            margin: 12px auto 0;
+            border-radius: 4px;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 32px;
+            padding: 40px 32px;
+            box-shadow: 0 12px 32px -12px rgba(0,0,0,0.05);
+            border: 1px solid #eef2f8;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .content-card p {
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        /* mission vision grid */
+        .mission-vision {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 20px;
+        }
+
+        .mv-card {
+            background: white;
+            border-radius: 28px;
+            padding: 32px 28px;
+            text-align: center;
+            transition: all 0.25s ease;
+            border: 1px solid #eef2f8;
+            box-shadow: 0 8px 20px -8px rgba(0,0,0,0.04);
+        }
+
+        .mv-card:hover {
+            transform: translateY(-6px);
+            border-color: #d4e2ed;
+            box-shadow: 0 24px 32px -16px rgba(10,42,67,0.12);
+        }
+
+        .mv-card i {
+            font-size: 2.4rem;
+            color: #ffb347;
+            background: #fef5e8;
+            padding: 14px;
+            border-radius: 40px;
+            margin-bottom: 20px;
+        }
+
+        .mv-card h3 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #0a2a43;
+        }
+
+        .mv-card p {
+            color: #4a627a;
+        }
+
+        /* values grid */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 28px;
+            margin-top: 20px;
+        }
+
+        .value-item {
+            background: white;
+            border-radius: 24px;
+            padding: 28px 20px;
+            text-align: center;
+            border: 1px solid #edf2f7;
+            transition: 0.2s;
+        }
+
+        .value-item i {
+            font-size: 2.2rem;
+            color: #0a2a43;
+            background: #eef3fc;
+            width: 64px;
+            height: 64px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 30px;
+            margin-bottom: 18px;
+        }
+
+        .value-item h4 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #1e3a5f;
+        }
+
+        /* company details panel */
+        .company-details {
+            background: #f8fafd;
+            border-radius: 40px;
+            padding: 40px 32px;
+            max-width: 850px;
+            margin: 0 auto;
+            border: 1px solid #e2edf5;
+        }
+
+        .details-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 28px;
+            row-gap: 24px;
+            margin-top: 20px;
+        }
+
+        .detail-chip {
+            background: white;
+            padding: 12px 28px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            border: 1px solid #e0eaf2;
+        }
+
+        .detail-chip i {
+            color: #ffb347;
+            font-size: 1.2rem;
+        }
+
+        /* team section */
+        .team-text {
+            background: white;
+            border-radius: 28px;
+            padding: 36px 32px;
+            text-align: center;
+            max-width: 780px;
+            margin: 0 auto;
+            box-shadow: 0 10px 24px -10px rgba(0,0,0,0.03);
+        }
+
+        /* footer */
+        footer {
+            background: #0f1f2c;
+            color: #cbdbe6;
+            text-align: center;
+            padding: 36px 24px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+        }
+
+        footer p {
+            margin: 6px 0;
+        }
+
+        /* WhatsApp floating button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 6px 20px rgba(37,211,102,0.4);
+            transition: all 0.2s ease;
+            z-index: 1000;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.08);
+            background: #20b859;
+            box-shadow: 0 12px 24px rgba(37,211,102,0.5);
+        }
+
+        @media (max-width: 720px) {
+            header {
+                flex-direction: column;
+                gap: 14px;
+                padding: 16px 20px;
+            }
+            nav {
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .about-hero h2 {
+                font-size: 2.2rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .whatsapp-float {
+                width: 52px;
+                height: 52px;
+                font-size: 1.8rem;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Loader overlay -->
+<div class="loader-wrapper" id="globalLoader">
+    <div class="loader-content">
+        <div class="loader-circle"></div>
+        <h3>DV5 PROJECTS</h3>
+        <p>Commitment. Quality. Delivery.</p>
+    </div>
+</div>
+
+<div class="page-container">
+    <header>
+        <div class="logo-area">
+            <i class="fas fa-hard-hat"></i>
+            <h1>DV5 PROJECTS</h1>
+        </div>
+        <nav>
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="#" class="active">About</a>
+            <a href="services.html">Services</a>
+            <a href="portfolio.html">Projects</a>
+            <a href="contact.html">Contact</a>
+            <a href="documents.html">Documents</a>
+        </nav>
+    </header>
+
+    <div class="about-hero">
+        <h2>About DV5 Projects</h2>
+        <p>Building trust, delivering excellence — a proudly South African contracting company with a vision for sustainable growth and professional execution.</p>
+    </div>
+
+    <section>
+        <div class="content-card">
+            <p>DV5 Projects is a registered private company operating within Gauteng, South Africa. Established in 2017, the company specializes in delivering project-based and contracting solutions tailored to client requirements. Over the years, DV5 Projects has built a reputation for reliability, professionalism, and a commitment to quality service delivery. The company continues to grow its presence within the contracting and project services sector, driven by integrity and operational excellence.</p>
+            <div style="margin-top: 24px; display: flex; justify-content: center; gap: 18px; flex-wrap: wrap;">
+                <span style="background:#eef2fa; padding: 6px 18px; border-radius: 40px; font-size:0.8rem;"><i class="fas fa-check-circle" style="color:#ffb347;"></i> Since 2017</span>
+                <span style="background:#eef2fa; padding: 6px 18px; border-radius: 40px; font-size:0.8rem;"><i class="fas fa-chart-line"></i> Growing portfolio</span>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Mission & Vision</h2>
+        <div class="mission-vision">
+            <div class="mv-card">
+                <i class="fas fa-bullseye"></i>
+                <h3>Mission</h3>
+                <p>To deliver high-quality, reliable, and efficient project solutions that meet and exceed client expectations while fostering long-term partnerships.</p>
+            </div>
+            <div class="mv-card">
+                <i class="fas fa-eye"></i>
+                <h3>Vision</h3>
+                <p>To be a trusted and leading provider of contracting and project services within South Africa, recognized for innovation, safety, and integrity.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Our Values</h2>
+        <div class="values-grid">
+            <div class="value-item">
+                <i class="fas fa-handshake"></i>
+                <h4>Reliability</h4>
+                <p>We deliver on our commitments consistently and on time, every time.</p>
+            </div>
+            <div class="value-item">
+                <i class="fas fa-medal"></i>
+                <h4>Quality</h4>
+                <p>We maintain high standards in all our projects and services with rigorous oversight.</p>
+            </div>
+            <div class="value-item">
+                <i class="fas fa-gavel"></i>
+                <h4>Compliance</h4>
+                <p>We adhere to all legal, regulatory, and industry requirements with transparency.</p>
+            </div>
+            <div class="value-item">
+                <i class="fas fa-user-tie"></i>
+                <h4>Professionalism</h4>
+                <p>We conduct our business with integrity, respect, and clear communication.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Company Details</h2>
+        <div class="company-details">
+            <div class="details-grid">
+                <div class="detail-chip"><i class="fas fa-building"></i> DV5 PROJECTS</div>
+                <div class="detail-chip"><i class="fas fa-registered"></i> K2017320936</div>
+                <div class="detail-chip"><i class="fas fa-chart-pie"></i> Private Company</div>
+                <div class="detail-chip"><i class="fas fa-calendar-alt"></i> Incorp: 21 July 2017</div>
+                <div class="detail-chip"><i class="fas fa-file-invoice-dollar"></i> VAT: 9416834183</div>
+                <div class="detail-chip"><i class="fas fa-check-circle"></i> Status: Active</div>
+            </div>
+            <p style="text-align: center; margin-top: 28px; font-size: 0.9rem; color: #2c4b66;"><i class="fas fa-map-marker-alt"></i> Head Office: Pretoria, Gauteng, South Africa</p>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Our Team & Approach</h2>
+        <div class="team-text">
+            <i class="fas fa-users" style="font-size: 2.8rem; color: #ffb347; margin-bottom: 18px; display: inline-block;"></i>
+            <p>Our team consists of dedicated professionals with extensive experience in project management, contracting, and service delivery. We work collaboratively to ensure successful project outcomes, combining technical expertise with a client-first mindset. Every project is approached with meticulous planning, safety consciousness, and a drive for excellence.</p>
+            <div style="margin-top: 24px;">
+                <span style="background:#eef2fa; padding: 6px 16px; border-radius: 30px; font-size:0.8rem;"><i class="fas fa-chart-simple"></i> 8+ years industry presence</span>
+                <span style="background:#eef2fa; padding: 6px 16px; border-radius: 30px; margin-left: 8px; font-size:0.8rem;"><i class="fas fa-certificate"></i> Fully compliant & BBB-EE ready</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p><i class="fas fa-hard-hat"></i> DV5 PROJECTS — Excellence in Contracting</p>
+        <p>Registration No: K2017320936 | VAT No: 9416834183</p>
+        <p>© 2026 DV5 Projects. All rights reserved. | Built on integrity and delivery.</p>
+    </footer>
+</div>
+
+<!-- WhatsApp floating icon with South African number placeholder -->
+<a href="https://wa.me/27767288529?text=Hello%20DV5%20Projects%2C%20I%20visited%20your%20About%20page%20and%20would%20like%20to%20discuss%20potential%20collaboration." 
+   class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+    // Loader hide with smooth transition & min display time
+    window.addEventListener('DOMContentLoaded', () => {
+        const loader = document.getElementById('globalLoader');
+        const start = Date.now();
+
+        const hideLoader = () => {
+            if (loader && !loader.classList.contains('hidden')) {
+                loader.classList.add('hidden');
+                setTimeout(() => {
+                    if (loader && loader.parentNode) loader.style.display = 'none';
+                }, 600);
+            }
+        };
+
+        const maxTimeout = setTimeout(() => hideLoader(), 2000);
+
+        window.addEventListener('load', () => {
+            const elapsed = Date.now() - start;
+            const remaining = Math.max(450, 1000 - elapsed);
+            setTimeout(() => {
+                hideLoader();
+                clearTimeout(maxTimeout);
+            }, remaining);
+        });
+
+        if (document.readyState === 'complete') {
+            const elapsed = Date.now() - start;
+            const remaining = Math.max(300, 900 - elapsed);
+            setTimeout(() => {
+                hideLoader();
+                clearTimeout(maxTimeout);
+            }, remaining);
+        }
+    });
+
+    // smooth scroll for anchor links that point to index sections
+    document.querySelectorAll('a[href="index.html#services"], a[href="index.html#contact"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const sectionId = this.getAttribute('href').split('#')[1];
+            if (sectionId) {
+                window.location.href = `index.html#${sectionId}`;
+            }
+        });
+    });
+</script>
+</body>
+</html>

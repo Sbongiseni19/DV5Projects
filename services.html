@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Our Services | DV5 Projects - Excellence in Contracting</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            color: #1e2a3e;
+            background-color: #fbfdfe;
+            overflow-x: hidden;
+        }
+
+        /* ----- LOADER OVERLAY (modern) ----- */
+        .loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a2a43;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1), visibility 0.5s;
+            backdrop-filter: blur(0px);
+        }
+
+        .loader-overlay.hide-loader {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-container {
+            text-align: center;
+        }
+
+        .loader-ring {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem;
+            border: 5px solid rgba(255,255,255,0.2);
+            border-top: 5px solid #ffb347;
+            border-right: 5px solid #4aa3df;
+            border-radius: 50%;
+            animation: spin 0.85s linear infinite;
+        }
+
+        .loader-container h3 {
+            color: white;
+            font-weight: 500;
+            letter-spacing: 1px;
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .loader-container p {
+            color: #cbd5e6;
+            font-size: 0.8rem;
+            margin-top: 0.75rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* fade-in for main content */
+        .main-content {
+            opacity: 0;
+            animation: fadeSlideUp 0.7s ease forwards;
+            animation-delay: 0.1s;
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* header styles */
+        header {
+            background: #0a2a43;
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-area i {
+            font-size: 1.8rem;
+            color: #ffb347;
+        }
+
+        header h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            background: linear-gradient(130deg, #ffffff, #cfdfed);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav {
+            display: flex;
+            gap: 28px;
+        }
+
+        nav a {
+            color: #f0f4fa;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            padding-bottom: 4px;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav a:hover, nav a.active {
+            border-bottom-color: #ffb347;
+            color: white;
+        }
+
+        /* page intro */
+        .page-intro {
+            background: linear-gradient(115deg, #f1f5f9 0%, #ffffff 100%);
+            text-align: center;
+            padding: 60px 24px 48px;
+            border-bottom: 1px solid #e2edf2;
+        }
+
+        .page-intro h2 {
+            font-size: 2.7rem;
+            font-weight: 700;
+            color: #0a2a43;
+            margin-bottom: 16px;
+        }
+
+        .page-intro p {
+            max-width: 680px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: #2c4b66;
+        }
+
+        /* services section */
+        .services-section {
+            padding: 70px 24px 80px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-badge {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .section-badge span {
+            background: #eef2ff;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #0a2a43;
+            letter-spacing: 0.5px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 28px;
+            padding: 32px 28px;
+            transition: all 0.3s ease;
+            border: 1px solid #eef2f8;
+            box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.04);
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: #cbdde9;
+            box-shadow: 0 28px 38px -16px rgba(10,42,67,0.18);
+        }
+
+        .card-icon {
+            font-size: 2.6rem;
+            color: #0a2a43;
+            background: #eef3fc;
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            margin-bottom: 24px;
+        }
+
+        .service-card h3 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #0a2a43;
+        }
+
+        .service-description {
+            color: #2c3e4e;
+            margin-bottom: 20px;
+            font-weight: 400;
+            border-left: 3px solid #ffb347;
+            padding-left: 14px;
+            margin-top: 6px;
+        }
+
+        .service-meta {
+            margin-top: 20px;
+            border-top: 1px solid #e9edf2;
+            padding-top: 18px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .meta-item i {
+            color: #ffb347;
+            font-size: 1rem;
+            margin-top: 3px;
+            width: 20px;
+        }
+
+        .meta-item strong {
+            font-weight: 600;
+            color: #1e3a5f;
+        }
+
+        .meta-item span {
+            color: #4a627a;
+            font-size: 0.9rem;
+        }
+
+        /* CTA banner */
+        .cta-banner {
+            background: linear-gradient(105deg, #0a2a43 0%, #175d82 100%);
+            margin: 20px auto 50px;
+            max-width: 1100px;
+            border-radius: 36px;
+            padding: 48px 36px;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-banner h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .cta-banner .btn-light {
+            background: white;
+            color: #0a2a43;
+            padding: 12px 34px;
+            border-radius: 40px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 18px;
+            text-decoration: none;
+            transition: 0.2s;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+        }
+
+        .cta-banner .btn-light:hover {
+            background: #ffb347;
+            color: #0a2a43;
+            transform: scale(1.02);
+        }
+
+        /* footer */
+        footer {
+            background: #0f1f2c;
+            color: #b9cee6;
+            text-align: center;
+            padding: 36px 24px;
+            font-size: 0.85rem;
+            margin-top: 20px;
+        }
+
+        footer p {
+            margin: 8px 0;
+        }
+
+        footer i {
+            margin: 0 4px;
+            color: #ffb347;
+        }
+
+        /* WhatsApp floating button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 8px 22px rgba(37,211,102,0.35);
+            transition: all 0.2s ease;
+            z-index: 1000;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.08);
+            background: #20b359;
+            box-shadow: 0 12px 26px rgba(37,211,102,0.45);
+        }
+
+        /* responsive */
+        @media (max-width: 720px) {
+            header {
+                flex-direction: column;
+                gap: 14px;
+                padding: 16px 20px;
+            }
+            nav {
+                gap: 18px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .page-intro h2 {
+                font-size: 2rem;
+            }
+            .services-grid {
+                gap: 24px;
+            }
+            .service-card {
+                padding: 24px 20px;
+            }
+            .whatsapp-float {
+                width: 52px;
+                height: 52px;
+                font-size: 1.8rem;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- LOADER with modern look -->
+<div class="loader-overlay" id="loaderOverlay">
+    <div class="loader-container">
+        <div class="loader-ring"></div>
+        <h3>DV5 PROJECTS</h3>
+        <p>Loading expertise & solutions...</p>
+    </div>
+</div>
+
+<div class="main-content">
+    <header>
+        <div class="logo-area">
+            <i class="fas fa-hard-hat"></i>
+            <h1>DV5 PROJECTS</h1>
+        </div>
+        <nav>
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="about.html">About</a>
+            <a href="#" class="active">Services</a>
+            <a href="portfolio.html">Projects</a>
+            <a href="contact.html">Contact</a>
+            <a href="documents.html">Documents</a>
+        </nav>
+    </header>
+
+    <div class="page-intro">
+        <h2>Our Core Services</h2>
+        <p>Integrated solutions built on precision, reliability, and local expertise — delivering value across South Africa's contracting landscape since 2017.</p>
+    </div>
+
+    <section class="services-section">
+        <div class="section-badge">
+            <span><i class="fas fa-cog"></i> what we deliver</span>
+        </div>
+        <div class="services-grid">
+            <!-- service 1 -->
+            <div class="service-card">
+                <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Project Management</h3>
+                <div class="service-description">
+                    <p>End-to-end planning, risk control, and coordination to ensure projects are delivered on time and within budget.</p>
+                </div>
+                <div class="service-meta">
+                    <div class="meta-item"><i class="fas fa-users"></i> <strong>Beneficiaries:</strong> <span>Corporate clients & public sector</span></div>
+                    <div class="meta-item"><i class="fas fa-medal"></i> <strong>Experience:</strong> <span>Multi-sector project oversight & quality assurance</span></div>
+                </div>
+            </div>
+
+            <!-- service 2 -->
+            <div class="service-card">
+                <div class="card-icon"><i class="fas fa-hard-hat"></i></div>
+                <h3>General Contracting</h3>
+                <div class="service-description">
+                    <p>Reliable contracting services for construction and refurbishment — skilled labor, materials, and full site execution.</p>
+                </div>
+                <div class="service-meta">
+                    <div class="meta-item"><i class="fas fa-building"></i> <strong>Beneficiaries:</strong> <span>Developers, enterprises, institutions</span></div>
+                    <div class="meta-item"><i class="fas fa-clipboard-list"></i> <strong>Experience:</strong> <span>10+ years combined team expertise</span></div>
+                </div>
+            </div>
+
+            <!-- service 3 -->
+            <div class="service-card">
+                <div class="card-icon"><i class="fas fa-drafting-compass"></i></div>
+                <h3>Construction Support</h3>
+                <div class="service-description">
+                    <p>Site preparation, logistics coordination, and technical assistance to streamline complex builds.</p>
+                </div>
+                <div class="service-meta">
+                    <div class="meta-item"><i class="fas fa-truck"></i> <strong>Beneficiaries:</strong> <span>Main contractors & engineering firms</span></div>
+                    <div class="meta-item"><i class="fas fa-chart-simple"></i> <strong>Experience:</strong> <span>Supporting high-volume infrastructure projects</span></div>
+                </div>
+            </div>
+
+            <!-- service 4 -->
+            <div class="service-card">
+                <div class="card-icon"><i class="fas fa-tools"></i></div>
+                <h3>Maintenance & Repairs</h3>
+                <div class="service-description">
+                    <p>Preventative and corrective maintenance to preserve asset value and operational continuity.</p>
+                </div>
+                <div class="service-meta">
+                    <div class="meta-item"><i class="fas fa-home"></i> <strong>Beneficiaries:</strong> <span>Property owners, facility managers</span></div>
+                    <div class="meta-item"><i class="fas fa-clock"></i> <strong>Experience:</strong> <span>Rapid response & long-term care contracts</span></div>
+                </div>
+            </div>
+
+            <!-- service 5 -->
+            <div class="service-card">
+                <div class="card-icon"><i class="fas fa-boxes"></i></div>
+                <h3>Supply & Procurement</h3>
+                <div class="service-description">
+                    <p>Strategic sourcing, procurement management, and reliable material supply chain solutions.</p>
+                </div>
+                <div class="service-meta">
+                    <div class="meta-item"><i class="fas fa-handshake"></i> <strong>Beneficiaries:</strong> <span>Construction firms, project houses</span></div>
+                    <div class="meta-item"><i class="fas fa-globe"></i> <strong>Experience:</strong> <span>Vetted supplier network & cost-efficient procurement</span></div>
+                </div>
+            </div>
+
+            <!-- bonus: specialized advisory -->
+            <div class="service-card">
+                <div class="card-icon"><i class="fas fa-file-signature"></i></div>
+                <h3>Compliance & Advisory</h3>
+                <div class="service-description">
+                    <p>Guidance on regulatory compliance, health & safety standards, and project documentation.</p>
+                </div>
+                <div class="service-meta">
+                    <div class="meta-item"><i class="fas fa-balance-scale"></i> <strong>Beneficiaries:</strong> <span>Startups, established contractors</span></div>
+                    <div class="meta-item"><i class="fas fa-certificate"></i> <strong>Experience:</strong> <span>Registered & VAT compliant (K2017320936)</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="cta-banner">
+        <h3>Ready to elevate your next project?</h3>
+        <p>Let’s discuss how DV5 Projects delivers excellence — from planning to handover.</p>
+        <a href="index.html#contact" class="btn-light"><i class="fas fa-envelope"></i> Request a consultation</a>
+    </div>
+
+    <footer>
+        <p><i class="fas fa-hard-hat"></i> DV5 PROJECTS — Quality-driven contracting</p>
+        <p>Registration No: K2017320936 | VAT No: 9416834183</p>
+        <p>© 2026 DV5 Projects. All rights reserved. | Building trust, one project at a time.</p>
+    </footer>
+</div>
+
+<!-- WhatsApp Floating Icon (with custom SA number placeholder) -->
+<a href="https://wa.me/27767288529?text=Hello%20DV5%20Projects%2C%20I'm%20interested%20in%20your%20contracting%20services.%20Please%20share%20more%20details." 
+   class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp chat">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+    // loader hide logic with smooth transition
+    window.addEventListener('DOMContentLoaded', function() {
+        const loader = document.getElementById('loaderOverlay');
+        const startTime = Date.now();
+
+        function hideLoaderPermanently() {
+            if (loader && !loader.classList.contains('hide-loader')) {
+                loader.classList.add('hide-loader');
+                setTimeout(() => {
+                    if (loader && loader.parentNode) loader.style.display = 'none';
+                }, 550);
+            }
+        }
+
+        // fallback: ensure loader disappears after max 1.8 seconds
+        const timeoutFallback = setTimeout(() => {
+            hideLoaderPermanently();
+        }, 1800);
+
+        window.addEventListener('load', function() {
+            const elapsed = Date.now() - startTime;
+            const remaining = Math.max(400, 1000 - elapsed);
+            setTimeout(() => {
+                hideLoaderPermanently();
+                clearTimeout(timeoutFallback);
+            }, remaining);
+        });
+
+        // if already loaded early
+        if (document.readyState === 'complete') {
+            const elapsed = Date.now() - startTime;
+            const remaining = Math.max(300, 900 - elapsed);
+            setTimeout(() => {
+                hideLoaderPermanently();
+                clearTimeout(timeoutFallback);
+            }, remaining);
+        }
+    });
+
+    // smooth scroll for internal anchor links (for contact / index references)
+    document.querySelectorAll('a[href^="index.html#contact"], a[href="#contact"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = 'contact';
+            const targetEl = document.getElementById(targetId);
+            if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                // fallback redirect to index with hash
+                window.location.href = 'index.html#contact';
+            }
+        });
+    });
+</script>
+</body>
+</html>

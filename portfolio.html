@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Our Projects | DV5 Projects - Excellence in Contracting</title>
+    <!-- Google Fonts: Inter + Font Awesome 6 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            color: #1e2a3e;
+            background: #fbfdfe;
+            overflow-x: hidden;
+        }
+
+        /* ----- LOADER (modern) ----- */
+        .loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a2a43;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.55s cubic-bezier(0.2, 0.9, 0.4, 1.1), visibility 0.55s;
+        }
+
+        .loader-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-ring {
+            width: 70px;
+            height: 70px;
+            border: 5px solid rgba(255,255,255,0.2);
+            border-top: 5px solid #ffb347;
+            border-right: 5px solid #4aa3df;
+            border-radius: 50%;
+            animation: spinLoader 0.85s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spinLoader {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loader-text {
+            text-align: center;
+            color: white;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        /* page fade-in */
+        .main-container {
+            opacity: 0;
+            animation: fadeInContent 0.7s ease forwards;
+            animation-delay: 0.1s;
+        }
+
+        @keyframes fadeInContent {
+            from { opacity: 0; transform: translateY(12px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        /* header */
+        header {
+            background: #0a2a43;
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-area i {
+            font-size: 1.8rem;
+            color: #ffb347;
+        }
+
+        header h1 {
+            font-size: 1.65rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #c9deed);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav {
+            display: flex;
+            gap: 28px;
+        }
+
+        nav a {
+            color: #eef3fc;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            padding-bottom: 4px;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav a:hover, nav a.active {
+            border-bottom-color: #ffb347;
+            color: white;
+        }
+
+        /* projects hero */
+        .projects-hero {
+            background: linear-gradient(115deg, #f0f5fa 0%, #ffffff 100%);
+            text-align: center;
+            padding: 64px 24px 56px;
+            border-bottom: 1px solid #e2edf2;
+        }
+
+        .projects-hero h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #0a2a43;
+            margin-bottom: 16px;
+        }
+
+        .projects-hero p {
+            max-width: 680px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+            color: #2c4b66;
+        }
+
+        /* projects section */
+        .projects-section {
+            padding: 70px 24px 80px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-badge {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .section-badge span {
+            background: #eef2fa;
+            padding: 6px 20px;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #0a2a43;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-top: 20px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid #eef2f8;
+            box-shadow: 0 12px 28px -10px rgba(0,0,0,0.04);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: #d4e2ed;
+            box-shadow: 0 28px 38px -16px rgba(10,42,67,0.15);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #cbdde9, #b0c4de);
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover .project-img {
+            transform: scale(1.02);
+        }
+
+        .project-content {
+            padding: 24px 24px 28px;
+        }
+
+        .project-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #0a2a43;
+        }
+
+        .project-desc {
+            color: #2c3e50;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+            line-height: 1.45;
+        }
+
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 12px;
+            border-top: 1px solid #eef2f8;
+            padding-top: 16px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: #4a627a;
+        }
+
+        .meta-item i {
+            color: #ffb347;
+            width: 18px;
+            font-size: 0.85rem;
+        }
+
+        /* stat section */
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            background: #f8fafd;
+            padding: 32px 24px;
+            border-radius: 60px;
+            margin-top: 56px;
+            border: 1px solid #e6edf5;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0a2a43;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #5c6f87;
+        }
+
+        /* footer */
+        footer {
+            background: #0f1f2c;
+            color: #b9cee6;
+            text-align: center;
+            padding: 36px 24px;
+            font-size: 0.85rem;
+            margin-top: 20px;
+        }
+
+        footer p {
+            margin: 8px 0;
+        }
+
+        .footer-links {
+            margin: 16px 0 12px;
+        }
+
+        .footer-links a {
+            color: #cbdbe6;
+            margin: 0 12px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: #ffb347;
+        }
+
+        /* WhatsApp floating button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 8px 22px rgba(37,211,102,0.35);
+            transition: all 0.2s ease;
+            z-index: 1000;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.08);
+            background: #20b859;
+            box-shadow: 0 12px 26px rgba(37,211,102,0.45);
+        }
+
+        @media (max-width: 720px) {
+            header {
+                flex-direction: column;
+                gap: 14px;
+                padding: 16px 20px;
+            }
+            nav {
+                gap: 18px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .projects-hero h2 {
+                font-size: 2.2rem;
+            }
+            .projects-grid {
+                gap: 24px;
+            }
+            .whatsapp-float {
+                width: 52px;
+                height: 52px;
+                font-size: 1.8rem;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- loader -->
+<div class="loader-overlay" id="loaderOverlay">
+    <div style="text-align: center;">
+        <div class="loader-ring"></div>
+        <div class="loader-text">DV5 PROJECTS<br><span style="font-size:0.7rem;">Showcasing our portfolio</span></div>
+    </div>
+</div>
+
+<div class="main-container">
+    <header>
+        <div class="logo-area">
+            <i class="fas fa-hard-hat"></i>
+            <h1>DV5 PROJECTS</h1>
+        </div>
+        <nav>
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="#" class="active">Projects</a>
+            <a href="contact.html">Contact</a>
+            <a href="documents.html">Documents</a>
+        </nav>
+    </header>
+
+    <div class="projects-hero">
+        <h2>Our Projects</h2>
+        <p>Delivering excellence across Gauteng and beyond — a selection of completed works demonstrating quality, reliability, and professional execution.</p>
+    </div>
+
+    <section class="projects-section">
+        <div class="section-badge">
+            <span><i class="fas fa-briefcase"></i> Recent & notable work</span>
+        </div>
+
+        <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="project-card">
+                <img class="project-img" src="https://placehold.co/600x400/0a2a43/white?text=Commercial+Site" alt="Commercial contracting project">
+                <div class="project-content">
+                    <h3>Equestria Commercial Hub</h3>
+                    <div class="project-desc">General contracting and project execution for a mixed-use commercial site. End-to-end coordination, labor management, and site supervision.</div>
+                    <div class="project-meta">
+                        <div class="meta-item"><i class="fas fa-user"></i> Client: Confidential</div>
+                        <div class="meta-item"><i class="fas fa-calendar-alt"></i> 2022</div>
+                        <div class="meta-item"><i class="fas fa-clipboard-list"></i> Scope: Full contracting</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card">
+                <img class="project-img" src="https://placehold.co/600x400/2c5a6e/white?text=Infrastructure+Maintenance" alt="Infrastructure maintenance">
+                <div class="project-content">
+                    <h3>Municipal Infrastructure Care</h3>
+                    <div class="project-desc">Preventative maintenance and repair services for public infrastructure assets, ensuring operational efficiency and safety compliance.</div>
+                    <div class="project-meta">
+                        <div class="meta-item"><i class="fas fa-user"></i> Client: Public Entity</div>
+                        <div class="meta-item"><i class="fas fa-calendar-alt"></i> 2023</div>
+                        <div class="meta-item"><i class="fas fa-tools"></i> Scope: Maintenance & repairs</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card">
+                <img class="project-img" src="https://placehold.co/600x400/4a6a4e/white?text=Supply+Chain" alt="Procurement project">
+                <div class="project-content">
+                    <h3>Materials Supply Program</h3>
+                    <div class="project-desc">Strategic sourcing and procurement of construction materials for a large-scale residential development, with just-in-time delivery.</div>
+                    <div class="project-meta">
+                        <div class="meta-item"><i class="fas fa-user"></i> Client: Property Developer</div>
+                        <div class="meta-item"><i class="fas fa-calendar-alt"></i> 2024</div>
+                        <div class="meta-item"><i class="fas fa-truck"></i> Scope: Procurement & logistics</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card">
+                <img class="project-img" src="https://placehold.co/600x400/8b5a2b/white?text=Project+Management" alt="Project management">
+                <div class="project-content">
+                    <h3>Multi-Phase Corporate Fit-out</h3>
+                    <div class="project-desc">End-to-end project management, scheduling, and quality assurance for a corporate office renovation across 3 phases.</div>
+                    <div class="project-meta">
+                        <div class="meta-item"><i class="fas fa-user"></i> Client: Confidential</div>
+                        <div class="meta-item"><i class="fas fa-calendar-alt"></i> 2024</div>
+                        <div class="meta-item"><i class="fas fa-chalkboard-user"></i> Scope: PM & coordination</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-card">
+                <img class="project-img" src="https://placehold.co/600x400/1e5f6e/white?text=Construction+Support" alt="Construction support">
+                <div class="project-content">
+                    <h3>Lyngrove Site Support</h3>
+                    <div class="project-desc">Construction support services including site preparation, safety auditing, and technical assistance for new developments.</div>
+                    <div class="project-meta">
+                        <div class="meta-item"><i class="fas fa-user"></i> Client: Main Contractor</div>
+                        <div class="meta-item"><i class="fas fa-calendar-alt"></i> 2023-2024</div>
+                        <div class="meta-item"><i class="fas fa-helmet-safety"></i> Scope: Site coordination</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="project-card">
+                <img class="project-img" src="https://placehold.co/600x400/2c5a6e/white?text=Renovation" alt="Renovation project">
+                <div class="project-content">
+                    <h3>Retail Space Revitalization</h3>
+                    <div class="project-desc">Complete refurbishment, structural repairs, and aesthetic upgrades for a retail center in Pretoria East.</div>
+                    <div class="project-meta">
+                        <div class="meta-item"><i class="fas fa-user"></i> Client: Retail Group</div>
+                        <div class="meta-item"><i class="fas fa-calendar-alt"></i> 2024</div>
+                        <div class="meta-item"><i class="fas fa-paint-roller"></i> Scope: Renovation</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- stats / trust indicators -->
+        <div class="stats-row">
+            <div class="stat-item">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Projects Completed</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">8+</div>
+                <div class="stat-label">Years of Experience</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Compliance Rate</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">Gauteng</div>
+                <div class="stat-label">Operational Region</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p><strong>DV5 PROJECTS</strong> — Excellence in Contracting & Project Management</p>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="#">Projects</a>
+            <a href="contact.html">Contact</a>
+            <a href="documents.html">Documents</a>
+        </div>
+        <p>Registration No: K2017320936 | VAT No: 9416834183</p>
+        <p>© 2026 DV5 Projects. All rights reserved. | Delivering quality, on time.</p>
+    </footer>
+</div>
+
+<!-- WhatsApp floating icon with direct inquiry -->
+<a href="https://wa.me/27767288529?text=Hello%20DV5%20Projects%2C%20I%20viewed%20your%20projects%20portfolio%20and%20would%20like%20to%20discuss%20a%20potential%20collaboration." 
+   class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+    // Loader hide after full load with minimum duration
+    (function() {
+        const loader = document.getElementById('loaderOverlay');
+        const startTime = Date.now();
+
+        function hideLoader() {
+            if (loader && !loader.classList.contains('hidden')) {
+                loader.classList.add('hidden');
+                setTimeout(() => {
+                    if (loader && loader.parentNode) loader.style.display = 'none';
+                }, 550);
+            }
+        }
+
+        const fallbackTimeout = setTimeout(() => hideLoader(), 2100);
+
+        window.addEventListener('load', () => {
+            const elapsed = Date.now() - startTime;
+            const delay = Math.max(450, 1000 - elapsed);
+            setTimeout(() => {
+                hideLoader();
+                clearTimeout(fallbackTimeout);
+            }, delay);
+        });
+
+        if (document.readyState === 'complete') {
+            const elapsed = Date.now() - startTime;
+            const delay = Math.max(300, 900 - elapsed);
+            setTimeout(() => {
+                hideLoader();
+                clearTimeout(fallbackTimeout);
+            }, delay);
+        }
+    })();
+</script>
+</body>
+</html>

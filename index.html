@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>DV5 Projects | Excellence in Contracting & Project Management</title>
+    <!-- Font Awesome 6 (Free Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.5;
+            color: #1e2a3e;
+            background-color: #fefefe;
+            overflow-x: hidden;
+        }
+
+        /* ----- LOADER OVERLAY (fullscreen, modern) ----- */
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a2a43;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1), visibility 0.6s;
+            backdrop-filter: blur(2px);
+        }
+
+        .loader-wrapper.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* sophisticated spinner + brand pulse */
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-logo {
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 8px rgba(255,255,200,0.4);
+            animation: fadePulse 1.4s infinite ease-in-out;
+        }
+
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            border: 5px solid rgba(255,255,255,0.2);
+            border-top: 5px solid #ffb347;
+            border-right: 5px solid #4aa3df;
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+        }
+
+        .loader-text {
+            color: #e0e7ff;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 1rem;
+            letter-spacing: 1px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadePulse {
+            0% { opacity: 0.6; transform: scale(0.98);}
+            50% { opacity: 1; transform: scale(1.02);}
+            100% { opacity: 0.6; transform: scale(0.98);}
+        }
+
+        /* smooth page entrance */
+        .page-content {
+            opacity: 0;
+            animation: pageFadeIn 0.8s ease forwards;
+            animation-delay: 0.1s;
+        }
+
+        @keyframes pageFadeIn {
+            from { opacity: 0; transform: translateY(12px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        /* header & nav refinements */
+        header {
+            background: #0a2a43;
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            font-size: 1.7rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #fff, #cbd5e6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav a {
+            color: #f0f4fa;
+            margin-left: 28px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        nav a:hover {
+            border-bottom-color: #ffb347;
+            color: #ffffff;
+        }
+
+        /* hero section */
+        .hero {
+            background: linear-gradient(135deg, #f8fafc 0%, #eef2f7 100%);
+            text-align: center;
+            padding: 100px 24px 90px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .hero h2 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: #0a2a43;
+            margin-bottom: 18px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            max-width: 720px;
+            margin: 0 auto 20px;
+            color: #2c3e4e;
+            font-size: 1.1rem;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .btn-primary, .btn-secondary, .btn-outline {
+            display: inline-block;
+            padding: 12px 28px;
+            text-decoration: none;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: #0a2a43;
+            color: white;
+            box-shadow: 0 4px 8px rgba(10,42,67,0.2);
+        }
+
+        .btn-primary:hover {
+            background: #134b6b;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px -8px rgba(10,42,67,0.3);
+        }
+
+        .btn-secondary {
+            background: #4b6a8b;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #2c4e6e;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #0a2a43;
+            color: #0a2a43;
+        }
+
+        .btn-outline:hover {
+            background: #0a2a43;
+            color: white;
+        }
+
+        /* sections */
+        section {
+            padding: 70px 24px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 48px;
+            font-weight: 700;
+            position: relative;
+            color: #0a2a43;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 4px;
+            background: #ffb347;
+            margin: 12px auto 0;
+            border-radius: 4px;
+        }
+
+        /* services grid */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 32px 20px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.02);
+            border: 1px solid #e9edf2;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 36px -12px rgba(10,42,67,0.15);
+            border-color: #cfdee9;
+        }
+
+        .card i {
+            font-size: 2.6rem;
+            color: #0a2a43;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: #4a5c6c;
+            font-size: 0.9rem;
+        }
+
+        /* CTA section */
+        .cta {
+            background: linear-gradient(115deg, #0a2a43 0%, #134b6b 100%);
+            color: white;
+            text-align: center;
+            border-radius: 40px;
+            margin: 40px auto;
+            padding: 64px 32px;
+            max-width: 1100px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
+        }
+
+        .cta h2 {
+            font-size: 2rem;
+            margin-bottom: 18px;
+        }
+
+        .cta .btn-primary {
+            background: #ffb347;
+            color: #0a2a43;
+            box-shadow: none;
+        }
+
+        .cta .btn-secondary {
+            background: #ffffff20;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* contact area */
+        #contact {
+            background: #f9fbfd;
+            border-radius: 48px;
+            margin: 20px auto 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+        }
+
+        .contact-details {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: white;
+            padding: 12px 28px;
+            border-radius: 60px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border: 1px solid #e2e8f0;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: #0a2a43;
+        }
+
+        /* WhatsApp floating icon */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            box-shadow: 0 6px 20px rgba(37,211,102,0.4);
+            transition: all 0.2s;
+            z-index: 1000;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.08);
+            background: #20b859;
+            box-shadow: 0 10px 28px rgba(37,211,102,0.5);
+        }
+
+        /* footer */
+        footer {
+            background: #0f1f2c;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 32px 20px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+        }
+
+        footer p {
+            margin: 6px 0;
+        }
+
+        /* responsiveness */
+        @media (max-width: 780px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+            nav a {
+                margin: 0 12px;
+            }
+            .hero h2 {
+                font-size: 2.4rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .whatsapp-float {
+                width: 52px;
+                height: 52px;
+                font-size: 1.9rem;
+                bottom: 22px;
+                right: 22px;
+            }
+        }
+
+        /* small text polish */
+        .company-badge {
+            font-size: 0.8rem;
+            letter-spacing: 0.3px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- FULLSCREEN LOADER -->
+<div class="loader-wrapper" id="globalLoader">
+    <div class="loader-content">
+        <div class="loader-spinner"></div>
+        <div class="loader-logo">DV5</div>
+        <div class="loader-text">Precision. Integrity. Delivery.</div>
+    </div>
+</div>
+
+<div class="page-content">
+    <header>
+        <h1><i class="fas fa-hard-hat" style="font-size: 1.4rem; margin-right: 8px;"></i> DV5 PROJECTS</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="services.html">Services</a>
+            <a href="about.html">About</a>
+            <a href="portfolio.html">Projects</a>
+            <a href="contact.html">Contact</a>
+            <a href="documents.html">Documents</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>DV5 PROJECTS</h2>
+        <p>Delivering reliable project & contracting solutions across South Africa.</p>
+        <p style="font-size: 1rem; max-width: 680px;">DV5 Projects is a South African-based private company specializing in project execution and contracting services. Established in 2017, we are committed to delivering quality, efficiency, and professionalism in every project we undertake.</p>
+        <div class="buttons">
+            <a href="#services" class="btn-primary"><i class="fas fa-tools"></i> View Services</a>
+            <a href="#contact" class="btn-secondary"><i class="fas fa-envelope"></i> Contact Us</a>
+            <a href="#" class="btn-outline"><i class="fas fa-file-pdf"></i> Download Company Profile</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">About DV5 Projects</h2>
+        <div style="max-width: 860px; margin: 0 auto; text-align: center; background: #ffffff; padding: 20px 28px; border-radius: 40px; box-shadow: 0 2px 12px rgba(0,0,0,0.02);">
+            <p style="font-size: 1.05rem; color: #2c3e50;">DV5 Projects is a registered private company operating within Gauteng, South Africa. Since its incorporation in 2017, the company has focused on providing dependable project-based solutions tailored to client needs. With a strong emphasis on compliance, quality, and timely delivery, DV5 Projects continues to build its reputation within the contracting and services sector.</p>
+            <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 28px;">
+                <span><i class="fas fa-check-circle" style="color:#0a2a43;"></i> Registered (K2017320936)</span>
+                <span><i class="fas fa-check-circle" style="color:#0a2a43;"></i> VAT: 9416834183</span>
+                <span><i class="fas fa-check-circle" style="color:#0a2a43;"></i> B-BBEE Compliant</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2 class="section-title">Our Core Services</h2>
+        <div class="services">
+            <div class="card">
+                <i class="fas fa-chalkboard-user"></i>
+                <h3>Project Management</h3>
+                <p>End-to-end oversight, planning, and execution for industrial & commercial projects.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-hard-hat"></i>
+                <h3>General Contracting</h3>
+                <p>Full-scope contracting solutions, from labour management to site supervision.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-drafting-compass"></i>
+                <h3>Construction Support</h3>
+                <p>Technical assistance, quality assurance, and logistical coordination.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-screwdriver-wrench"></i>
+                <h3>Maintenance & Repairs</h3>
+                <p>Preventative & corrective maintenance to keep assets running smoothly.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-truck-fast"></i>
+                <h3>Supply & Procurement</h3>
+                <p>Reliable sourcing of materials, equipment, and supply chain solutions.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Why Choose DV5 Projects?</h2>
+        <p style="max-width: 600px; margin: 0 auto 24px;">Established and registered company committed to quality, compliance, and client satisfaction. We bring local expertise, transparency, and on-time delivery.</p>
+        <div class="buttons">
+            <a href="#services" class="btn-primary"><i class="fas fa-arrow-right"></i> Explore services</a>
+            <a href="#contact" class="btn-secondary"><i class="fas fa-phone-alt"></i> Get a quote</a>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <p style="text-align: center; max-width: 560px; margin: 0 auto 20px; color: #2c3e50;">We welcome inquiries, partnerships, and collaboration opportunities. Let’s build together.</p>
+        <div class="contact-details">
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>info@dv5projects.co.za</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <span>+27 (12) 345 6789</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Pretoria, Gauteng, SA</span>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 32px;">
+            <a href="#contact" class="btn-primary" style="background:#ffb347; color:#0a2a43; font-weight:bold;"><i class="fas fa-calendar-check"></i> Request callback</a>
+        </div>
+    </section>
+
+    <footer>
+        <p><strong>DV5 PROJECTS</strong> | Built on integrity & excellence</p>
+        <p>Registration No: K2017320936 | VAT No: 9416834183</p>
+        <p>© 2026 DV5 Projects. All rights reserved. | Empowering South African infrastructure</p>
+    </footer>
+</div>
+
+<!-- FIXED WHATSAPP ICON (with pre-filled message) -->
+<a href="https://wa.me/27767288529?text=Hello%20DV5%20Projects%2C%20I%E2%80%99d%20like%20to%20inquire%20about%20your%20contracting%20services." 
+   class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+    // sophisticated loader: simulate minimal loading time and hide loader with smooth transition
+    window.addEventListener('DOMContentLoaded', () => {
+        // ensure loader visible for at least 800ms to show animation, but max 1.8 secs
+        const loader = document.getElementById('globalLoader');
+        // start timer
+        const startTime = Date.now();
+        const hideLoader = () => {
+            if (loader) {
+                loader.classList.add('hidden');
+                // after transition, optionally remove from DOM to free events
+                setTimeout(() => {
+                    if (loader.parentNode) loader.style.display = 'none';
+                }, 700);
+            }
+        };
+        // Force hide after 1.8 seconds max
+        const maxTimeout = setTimeout(() => {
+            hideLoader();
+        }, 1800);
+        
+        // also hide earlier when everything fully loaded + at least 0.9 secs
+        window.addEventListener('load', () => {
+            const elapsed = Date.now() - startTime;
+            const remaining = Math.max(500, 1000 - elapsed);
+            setTimeout(() => {
+                hideLoader();
+                clearTimeout(maxTimeout);
+            }, remaining);
+        });
+        
+        // fallback if load event already triggered? double-safe
+        if (document.readyState === 'complete') {
+            const elapsed = Date.now() - startTime;
+            const remaining = Math.max(300, 1000 - elapsed);
+            setTimeout(() => {
+                hideLoader();
+                clearTimeout(maxTimeout);
+            }, remaining);
+        }
+    });
+    
+    // optional: smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === "#" || targetId === "") return;
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
+</body>
+</html>
