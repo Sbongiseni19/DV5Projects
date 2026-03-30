@@ -22,7 +22,7 @@
             overflow-x: hidden;
         }
 
-        /* ========== FIXED LOADER - PROPERLY CENTERED ON ALL DEVICES ========== */
+        /* Loader */
         .loader-overlay {
             position: fixed;
             top: 0;
@@ -42,7 +42,6 @@
             visibility: hidden;
         }
 
-        /* Loader container - properly centered using flex */
         .loader-container {
             display: flex;
             flex-direction: column;
@@ -70,7 +69,6 @@
             font-weight: 500;
             letter-spacing: 1px;
             font-size: 1.2rem;
-            margin-top: 0.5rem;
         }
 
         .loader-container p {
@@ -84,7 +82,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* fade-in for main content */
         .main-content {
             opacity: 0;
             animation: fadeSlideUp 0.7s ease forwards;
@@ -92,17 +89,11 @@
         }
 
         @keyframes fadeSlideUp {
-            from {
-                opacity: 0;
-                transform: translateY(18px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(18px);}
+            to { opacity: 1; transform: translateY(0);}
         }
 
-        /* ========== REFINED HEADER WITH HAMBURGER MENU ========== */
+        /* ========== REFINED HEADER WITH FIXED HAMBURGER (NO COLLISION) ========== */
         header {
             background: rgba(255, 255, 255, 0.98);
             padding: 0 32px;
@@ -159,7 +150,7 @@
             vertical-align: middle;
         }
 
-        /* Hamburger button - visible on mobile */
+        /* Hamburger button */
         .hamburger {
             display: none;
             background: none;
@@ -167,9 +158,10 @@
             font-size: 1.8rem;
             color: #1e4a6b;
             cursor: pointer;
-            padding: 12px 8px;
+            padding: 12px;
             transition: all 0.2s;
-            z-index: 1001;
+            z-index: 1002;
+            position: relative;
         }
 
         .hamburger:hover {
@@ -228,7 +220,7 @@
             transform: translateY(-1px);
         }
 
-        /* Mobile responsive styles */
+        /* Mobile responsive styles - FIXED: cancel button no longer collides */
         @media (max-width: 880px) {
             header {
                 padding: 8px 20px;
@@ -242,12 +234,12 @@
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 280px;
+                width: min(320px, 85%);
                 height: 100vh;
                 background: white;
-                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.2);
                 transition: right 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-                z-index: 1000;
+                z-index: 1002;
                 padding: 80px 24px 40px;
                 display: block;
                 overflow-y: auto;
@@ -291,7 +283,7 @@
                 width: 100%;
                 height: 100%;
                 background: rgba(0, 0, 0, 0.5);
-                z-index: 999;
+                z-index: 1001;
                 opacity: 0;
                 visibility: hidden;
                 transition: all 0.3s ease;
@@ -302,23 +294,42 @@
                 visibility: visible;
             }
             
-            /* Close button inside mobile menu */
+            /* Close button inside mobile menu - FIX: distinct styling, no collision */
             .close-menu {
                 position: absolute;
                 top: 20px;
-                right: 20px;
-                background: none;
+                right: 24px;
+                background: #ffffff;
                 border: none;
-                font-size: 1.8rem;
+                font-size: 1.6rem;
                 color: #1e4a6b;
                 cursor: pointer;
-                padding: 8px;
-                transition: all 0.2s;
+                padding: 12px;
+                transition: all 0.2s ease;
+                border-radius: 50%;
+                width: 48px;
+                height: 48px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #f8fafc;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+                z-index: 1003;
+            }
+            
+            .close-menu i {
+                font-size: 1.4rem;
             }
             
             .close-menu:hover {
                 color: #f5a623;
                 transform: rotate(90deg);
+                background: #fef5e8;
+            }
+            
+            /* Ensure navigation items don't overlap with close button */
+            .nav-menu nav {
+                margin-top: 20px;
             }
             
             .logo-area h1 {
@@ -350,6 +361,22 @@
                 width: 34px;
                 height: 34px;
                 font-size: 1.2rem;
+            }
+            
+            .close-menu {
+                top: 16px;
+                right: 20px;
+                width: 44px;
+                height: 44px;
+                font-size: 1.4rem;
+            }
+            
+            .close-menu i {
+                font-size: 1.2rem;
+            }
+            
+            .nav-menu {
+                padding: 72px 20px 30px;
             }
         }
 
@@ -394,12 +421,11 @@
             font-size: 0.8rem;
             font-weight: 600;
             color: #0a2a43;
-            letter-spacing: 0.5px;
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 32px;
             margin-top: 40px;
         }
@@ -411,7 +437,6 @@
             transition: all 0.3s ease;
             border: 1px solid #eef2f8;
             box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.04);
-            position: relative;
         }
 
         .service-card:hover {
@@ -434,7 +459,7 @@
         }
 
         .service-card h3 {
-            font-size: 1.7rem;
+            font-size: 1.6rem;
             font-weight: 700;
             margin-bottom: 16px;
             color: #0a2a43;
@@ -443,10 +468,7 @@
         .service-description {
             color: #2c3e4e;
             margin-bottom: 20px;
-            font-weight: 400;
-            border-left: 3px solid #ffb347;
-            padding-left: 14px;
-            margin-top: 6px;
+            line-height: 1.5;
         }
 
         .service-meta {
@@ -459,12 +481,12 @@
             display: flex;
             align-items: flex-start;
             gap: 12px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         .meta-item i {
             color: #ffb347;
-            font-size: 1rem;
+            font-size: 0.95rem;
             margin-top: 3px;
             width: 20px;
         }
@@ -472,11 +494,12 @@
         .meta-item strong {
             font-weight: 600;
             color: #1e3a5f;
+            font-size: 0.85rem;
         }
 
         .meta-item span {
             color: #4a627a;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         /* CTA banner */
@@ -506,7 +529,6 @@
             margin-top: 18px;
             text-decoration: none;
             transition: 0.2s;
-            box-shadow: 0 6px 14px rgba(0,0,0,0.1);
         }
 
         .cta-banner .btn-light:hover {
@@ -515,7 +537,6 @@
             transform: scale(1.02);
         }
 
-        /* footer */
         footer {
             background: #0f1f2c;
             color: #b9cee6;
@@ -529,12 +550,6 @@
             margin: 8px 0;
         }
 
-        footer i {
-            margin: 0 4px;
-            color: #ffb347;
-        }
-
-        /* WhatsApp floating button */
         .whatsapp-float {
             position: fixed;
             bottom: 28px;
@@ -557,10 +572,8 @@
         .whatsapp-float:hover {
             transform: scale(1.08);
             background: #20b359;
-            box-shadow: 0 12px 26px rgba(37,211,102,0.45);
         }
 
-        /* responsive */
         @media (max-width: 720px) {
             .page-intro h2 {
                 font-size: 2rem;
@@ -585,12 +598,14 @@
             .cta-banner h3 {
                 font-size: 1.5rem;
             }
+            .service-card h3 {
+                font-size: 1.4rem;
+            }
         }
     </style>
 </head>
 <body>
 
-<!-- FIXED LOADER - PROPERLY CENTERED ON ALL DEVICES -->
 <div class="loader-overlay" id="loaderOverlay">
     <div class="loader-container">
         <div class="loader-ring"></div>
@@ -600,22 +615,18 @@
 </div>
 
 <div class="main-content">
-    <!-- REFINED HEADER WITH HAMBURGER MENU -->
     <header>
         <div class="logo-area">
             <i class="fas fa-hard-hat"></i>
             <h1>DV5 PROJECTS <span class="est-badge">est. 2017</span></h1>
         </div>
         
-        <!-- Hamburger Button (Mobile) -->
         <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
             <i class="fas fa-bars"></i>
         </button>
         
-        <!-- Mobile Menu Overlay -->
         <div class="menu-overlay" id="menuOverlay"></div>
         
-        <!-- Navigation Menu (Desktop + Mobile) -->
         <div class="nav-menu" id="navMenu">
             <button class="close-menu" id="closeMenuBtn" aria-label="Close menu">
                 <i class="fas fa-times"></i>
@@ -624,7 +635,7 @@
                 <a href="index.html"><i class="fas fa-home"></i> Home</a>
                 <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
                 <a href="#" class="active"><i class="fas fa-tools"></i> Services</a>
-                <a href="projects.html"><i class="fas fa-briefcase"></i> Projects</a>
+                <a href="portfolio.html"><i class="fas fa-briefcase"></i> Projects</a>
                 <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
                 <a href="documents.html"><i class="fas fa-file-alt"></i> Documents</a>
                 <a href="contact.html" class="nav-cta"><i class="fas fa-paper-plane"></i> Quote</a>
@@ -634,7 +645,7 @@
 
     <div class="page-intro">
         <h2>Our Core Services</h2>
-        <p>Integrated solutions built on precision, reliability, and local expertise — delivering value across South Africa's contracting landscape since 2017.</p>
+        <p>Comprehensive contracting solutions built on precision, reliability, and local expertise — delivering value across South Africa's infrastructure landscape.</p>
     </div>
 
     <section class="services-section">
@@ -642,81 +653,81 @@
             <span><i class="fas fa-cog"></i> what we deliver</span>
         </div>
         <div class="services-grid">
-            <!-- service 1 -->
+            <!-- Civil & Construction Services -->
+            <div class="service-card">
+                <div class="card-icon"><i class="fas fa-road"></i></div>
+                <h3>Civil & Construction Services</h3>
+                <div class="service-description">
+                    <p>Full-scale civil engineering works, earthworks, concrete structures, and site development for residential, commercial, and industrial projects.</p>
+                </div>
+                <div class="service-meta">
+                    <div class="meta-item"><i class="fas fa-building"></i> <strong>Projects:</strong> <span>Roads, drainage, foundations, bulk earthworks</span></div>
+                    <div class="meta-item"><i class="fas fa-hard-hat"></i> <strong>Capacity:</strong> <span>Turnkey execution & quality control</span></div>
+                </div>
+            </div>
+
+            <!-- General Building & Maintenance -->
+            <div class="service-card">
+                <div class="card-icon"><i class="fas fa-home"></i></div>
+                <h3>General Building & Maintenance</h3>
+                <div class="service-description">
+                    <p>New builds, renovations, refurbishments, and ongoing facility maintenance for commercial, industrial, and residential properties.</p>
+                </div>
+                <div class="service-meta">
+                    <div class="meta-item"><i class="fas fa-tools"></i> <strong>Services:</strong> <span>Structural repairs, roofing, tiling, painting, plumbing</span></div>
+                    <div class="meta-item"><i class="fas fa-clock"></i> <strong>Response:</strong> <span>Preventative & reactive maintenance plans</span></div>
+                </div>
+            </div>
+
+            <!-- Mechanical Engineering -->
+            <div class="service-card">
+                <div class="card-icon"><i class="fas fa-cogs"></i></div>
+                <h3>Mechanical Engineering</h3>
+                <div class="service-description">
+                    <p>Mechanical system design, installation, and maintenance — including HVAC, piping, and industrial equipment support.</p>
+                </div>
+                <div class="service-meta">
+                    <div class="meta-item"><i class="fas fa-industry"></i> <strong>Applications:</strong> <span>Industrial plants, commercial buildings, process systems</span></div>
+                    <div class="meta-item"><i class="fas fa-wrench"></i> <strong>Expertise:</strong> <span>Installation, diagnostics, preventative care</span></div>
+                </div>
+            </div>
+
+            <!-- Electrical Engineering -->
+            <div class="service-card">
+                <div class="card-icon"><i class="fas fa-bolt"></i></div>
+                <h3>Electrical Engineering</h3>
+                <div class="service-description">
+                    <p>Complete electrical solutions — from power distribution and lighting to control systems, compliance testing, and energy efficiency upgrades.</p>
+                </div>
+                <div class="service-meta">
+                    <div class="meta-item"><i class="fas fa-plug"></i> <strong>Capabilities:</strong> <span>Wiring, panels, fault finding, safety inspections</span></div>
+                    <div class="meta-item"><i class="fas fa-chart-line"></i> <strong>Compliance:</strong> <span>Industry standards & regulatory adherence</span></div>
+                </div>
+            </div>
+
+            <!-- Supply & Delivery -->
+            <div class="service-card">
+                <div class="card-icon"><i class="fas fa-truck"></i></div>
+                <h3>Supply & Delivery</h3>
+                <div class="service-description">
+                    <p>Reliable procurement and logistics — sourcing quality materials, equipment, and construction supplies with just-in-time delivery to site.</p>
+                </div>
+                <div class="service-meta">
+                    <div class="meta-item"><i class="fas fa-boxes"></i> <strong>Materials:</strong> <span>Building supplies, hardware, specialized components</span></div>
+                    <div class="meta-item"><i class="fas fa-handshake"></i> <strong>Network:</strong> <span>Vetted suppliers, cost-efficient procurement</span></div>
+                </div>
+            </div>
+
+            <!-- Additional: Project Management & Advisory (supporting core services) -->
             <div class="service-card">
                 <div class="card-icon"><i class="fas fa-chart-line"></i></div>
-                <h3>Project Management</h3>
+                <h3>Project Management & Advisory</h3>
                 <div class="service-description">
-                    <p>End-to-end planning, risk control, and coordination to ensure projects are delivered on time and within budget.</p>
+                    <p>End-to-end project oversight, planning, risk management, and technical advisory to ensure successful project outcomes.</p>
                 </div>
                 <div class="service-meta">
-                    <div class="meta-item"><i class="fas fa-users"></i> <strong>Beneficiaries:</strong> <span>Corporate clients & public sector</span></div>
-                    <div class="meta-item"><i class="fas fa-medal"></i> <strong>Experience:</strong> <span>Multi-sector project oversight & quality assurance</span></div>
-                </div>
-            </div>
-
-            <!-- service 2 -->
-            <div class="service-card">
-                <div class="card-icon"><i class="fas fa-hard-hat"></i></div>
-                <h3>General Contracting</h3>
-                <div class="service-description">
-                    <p>Reliable contracting services for construction and refurbishment — skilled labor, materials, and full site execution.</p>
-                </div>
-                <div class="service-meta">
-                    <div class="meta-item"><i class="fas fa-building"></i> <strong>Beneficiaries:</strong> <span>Developers, enterprises, institutions</span></div>
-                    <div class="meta-item"><i class="fas fa-clipboard-list"></i> <strong>Experience:</strong> <span>10+ years combined team expertise</span></div>
-                </div>
-            </div>
-
-            <!-- service 3 -->
-            <div class="service-card">
-                <div class="card-icon"><i class="fas fa-drafting-compass"></i></div>
-                <h3>Construction Support</h3>
-                <div class="service-description">
-                    <p>Site preparation, logistics coordination, and technical assistance to streamline complex builds.</p>
-                </div>
-                <div class="service-meta">
-                    <div class="meta-item"><i class="fas fa-truck"></i> <strong>Beneficiaries:</strong> <span>Main contractors & engineering firms</span></div>
-                    <div class="meta-item"><i class="fas fa-chart-simple"></i> <strong>Experience:</strong> <span>Supporting high-volume infrastructure projects</span></div>
-                </div>
-            </div>
-
-            <!-- service 4 -->
-            <div class="service-card">
-                <div class="card-icon"><i class="fas fa-tools"></i></div>
-                <h3>Maintenance & Repairs</h3>
-                <div class="service-description">
-                    <p>Preventative and corrective maintenance to preserve asset value and operational continuity.</p>
-                </div>
-                <div class="service-meta">
-                    <div class="meta-item"><i class="fas fa-home"></i> <strong>Beneficiaries:</strong> <span>Property owners, facility managers</span></div>
-                    <div class="meta-item"><i class="fas fa-clock"></i> <strong>Experience:</strong> <span>Rapid response & long-term care contracts</span></div>
-                </div>
-            </div>
-
-            <!-- service 5 -->
-            <div class="service-card">
-                <div class="card-icon"><i class="fas fa-boxes"></i></div>
-                <h3>Supply & Procurement</h3>
-                <div class="service-description">
-                    <p>Strategic sourcing, procurement management, and reliable material supply chain solutions.</p>
-                </div>
-                <div class="service-meta">
-                    <div class="meta-item"><i class="fas fa-handshake"></i> <strong>Beneficiaries:</strong> <span>Construction firms, project houses</span></div>
-                    <div class="meta-item"><i class="fas fa-globe"></i> <strong>Experience:</strong> <span>Vetted supplier network & cost-efficient procurement</span></div>
-                </div>
-            </div>
-
-            <!-- bonus: specialized advisory -->
-            <div class="service-card">
-                <div class="card-icon"><i class="fas fa-file-signature"></i></div>
-                <h3>Compliance & Advisory</h3>
-                <div class="service-description">
-                    <p>Guidance on regulatory compliance, health & safety standards, and project documentation.</p>
-                </div>
-                <div class="service-meta">
-                    <div class="meta-item"><i class="fas fa-balance-scale"></i> <strong>Beneficiaries:</strong> <span>Startups, established contractors</span></div>
-                    <div class="meta-item"><i class="fas fa-certificate"></i> <strong>Experience:</strong> <span>Registered & VAT compliant (K2017320936)</span></div>
+                    <div class="meta-item"><i class="fas fa-clipboard-list"></i> <strong>Support:</strong> <span>Scheduling, budgeting, quality assurance</span></div>
+                    <div class="meta-item"><i class="fas fa-balance-scale"></i> <strong>Compliance:</strong> <span>Regulatory alignment & documentation</span></div>
                 </div>
             </div>
         </div>
@@ -724,7 +735,7 @@
 
     <div class="cta-banner">
         <h3>Ready to elevate your next project?</h3>
-        <p>Let's discuss how DV5 Projects delivers excellence — from planning to handover.</p>
+        <p>Let's discuss how DV5 Projects delivers excellence — from civil works to turnkey delivery.</p>
         <a href="contact.html" class="btn-light"><i class="fas fa-envelope"></i> Request a consultation</a>
     </div>
 
@@ -735,19 +746,18 @@
     </footer>
 </div>
 
-<!-- WhatsApp Floating Icon (with custom SA number placeholder) -->
-<a href="https://wa.me/27767288529?text=Hello%20DV5%20Projects%2C%20I'm%20interested%20in%20your%20contracting%20services.%20Please%20share%20more%20details." 
-   class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp chat">
+<a href="https://wa.me/27767288529?text=Hello%20DV5%20Projects%2C%20I'm%20interested%20in%20your%20contracting%20services." 
+   class="whatsapp-float" target="_blank" rel="noopener noreferrer">
     <i class="fab fa-whatsapp"></i>
 </a>
 
 <script>
-    // ========== FIXED LOADER - PROPERLY CENTERED ==========
+    // Loader
     (function() {
         const loader = document.getElementById('loaderOverlay');
         const startTime = Date.now();
 
-        function hideLoaderPermanently() {
+        function hideLoader() {
             if (loader && !loader.classList.contains('hide-loader')) {
                 loader.classList.add('hide-loader');
                 setTimeout(() => {
@@ -756,15 +766,13 @@
             }
         }
 
-        const timeoutFallback = setTimeout(() => {
-            hideLoaderPermanently();
-        }, 1800);
+        const timeoutFallback = setTimeout(() => hideLoader(), 1800);
 
         window.addEventListener('load', function() {
             const elapsed = Date.now() - startTime;
             const remaining = Math.max(400, 1000 - elapsed);
             setTimeout(() => {
-                hideLoaderPermanently();
+                hideLoader();
                 clearTimeout(timeoutFallback);
             }, remaining);
         });
@@ -773,77 +781,75 @@
             const elapsed = Date.now() - startTime;
             const remaining = Math.max(300, 900 - elapsed);
             setTimeout(() => {
-                hideLoaderPermanently();
+                hideLoader();
                 clearTimeout(timeoutFallback);
             }, remaining);
         }
     })();
 
-    // ========== HAMBURGER MENU LOGIC ==========
+    // ========== FIXED HAMBURGER MENU LOGIC (NO COLLISION) ==========
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const navMenu = document.getElementById('navMenu');
     const menuOverlay = document.getElementById('menuOverlay');
     const closeMenuBtn = document.getElementById('closeMenuBtn');
 
     function openMenu() {
-        navMenu.classList.add('active');
-        menuOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        if (navMenu && menuOverlay) {
+            navMenu.classList.add('active');
+            menuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
     }
 
     function closeMenu() {
-        navMenu.classList.remove('active');
-        menuOverlay.classList.remove('active');
-        document.body.style.overflow = '';
+        if (navMenu && menuOverlay) {
+            navMenu.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     }
 
     if (hamburgerBtn) {
-        hamburgerBtn.addEventListener('click', openMenu);
+        hamburgerBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openMenu();
+        });
     }
+    
     if (closeMenuBtn) {
-        closeMenuBtn.addEventListener('click', closeMenu);
+        closeMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeMenu();
+        });
     }
+    
     if (menuOverlay) {
         menuOverlay.addEventListener('click', closeMenu);
     }
 
-    // Close menu when a nav link is clicked
+    // Close menu when any nav link is clicked
     const navLinks = document.querySelectorAll('.nav-menu nav a');
     navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            const href = link.getAttribute('href');
+        link.addEventListener('click', () => {
             closeMenu();
-            
-            // For external page links, allow normal navigation
-            if (href && (href.includes('.html') || href === '/' || href === '')) {
-                return;
-            }
-            
-            // For anchor links on same page
-            if (href && href.startsWith('#')) {
-                e.preventDefault();
-                const targetElement = document.querySelector(href);
-                if (targetElement) {
-                    setTimeout(() => {
-                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }, 100);
-                }
-            }
-            
-            // Update active class
-            navLinks.forEach(navLink => navLink.classList.remove('active'));
-            link.classList.add('active');
         });
     });
 
-    // Ensure active class is set for current page (Services page)
-    const currentPath = window.location.pathname;
+    // Active page highlighting
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     navLinks.forEach(link => {
         const href = link.getAttribute('href');
-        if (href === '#' || href === 'services.html' || (href === '' && document.title.includes('Services'))) {
+        if (href === currentPage || (currentPage === '' && href === 'index.html')) {
             link.classList.add('active');
-        } else if (href === 'services.html' && currentPath.includes('services')) {
+        } else if (currentPage.includes('services') && href === '#') {
             link.classList.add('active');
+        }
+    });
+    
+    // Additional safety: prevent body scroll when menu is open and handle window resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 880 && navMenu && navMenu.classList.contains('active')) {
+            closeMenu();
         }
     });
 </script>

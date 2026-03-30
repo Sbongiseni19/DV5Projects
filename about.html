@@ -155,6 +155,7 @@
             padding: 12px 8px;
             transition: all 0.2s;
             z-index: 1001;
+            position: relative;
         }
 
         .hamburger:hover {
@@ -213,7 +214,7 @@
             transform: translateY(-1px);
         }
 
-        /* Mobile responsive styles */
+        /* Mobile responsive styles - FIXED: cancel button no longer collides */
         @media (max-width: 880px) {
             header {
                 padding: 8px 20px;
@@ -227,12 +228,12 @@
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 280px;
+                width: min(320px, 85%);
                 height: 100vh;
                 background: white;
-                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.15);
                 transition: right 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-                z-index: 1000;
+                z-index: 1002;
                 padding: 80px 24px 40px;
                 display: block;
                 overflow-y: auto;
@@ -276,7 +277,7 @@
                 width: 100%;
                 height: 100%;
                 background: rgba(0, 0, 0, 0.5);
-                z-index: 999;
+                z-index: 1001;
                 opacity: 0;
                 visibility: hidden;
                 transition: all 0.3s ease;
@@ -287,23 +288,38 @@
                 visibility: visible;
             }
             
-            /* Close button inside mobile menu */
+            /* Close button inside mobile menu - FIX: positioned absolutely, no collision with hamburger lines */
             .close-menu {
                 position: absolute;
                 top: 20px;
-                right: 20px;
-                background: none;
+                right: 24px;
+                background: #ffffff;
                 border: none;
                 font-size: 1.8rem;
                 color: #1e4a6b;
                 cursor: pointer;
-                padding: 8px;
-                transition: all 0.2s;
+                padding: 12px;
+                transition: all 0.2s ease;
+                border-radius: 50%;
+                width: 48px;
+                height: 48px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #f8fafc;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                z-index: 1003;
             }
             
             .close-menu:hover {
                 color: #f5a623;
                 transform: rotate(90deg);
+                background: #fef5e8;
+            }
+            
+            /* Ensure close button is clearly separated and doesn't overlap with menu items */
+            .nav-menu nav {
+                margin-top: 20px;
             }
             
             .logo-area h1 {
@@ -335,6 +351,18 @@
                 width: 34px;
                 height: 34px;
                 font-size: 1.2rem;
+            }
+            
+            .close-menu {
+                top: 16px;
+                right: 20px;
+                width: 44px;
+                height: 44px;
+                font-size: 1.6rem;
+            }
+            
+            .nav-menu {
+                padding: 72px 20px 30px;
             }
         }
 
@@ -606,22 +634,22 @@
 </div>
 
 <div class="page-container">
-    <!-- REFINED HEADER WITH HAMBURGER MENU -->
+    <!-- REFINED HEADER WITH FIXED HAMBURGER MENU (No collision between cancel button and hamburger lines) -->
     <header>
         <div class="logo-area">
             <i class="fas fa-hard-hat"></i>
             <h1>DV5 PROJECTS <span class="est-badge">est. 2017</span></h1>
         </div>
         
-        <!-- Hamburger Button (Mobile) -->
+        <!-- Hamburger Button (Mobile) - visible on small screens, triggers side menu -->
         <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
             <i class="fas fa-bars"></i>
         </button>
         
-        <!-- Mobile Menu Overlay -->
+        <!-- Mobile Menu Overlay (dim background) -->
         <div class="menu-overlay" id="menuOverlay"></div>
         
-        <!-- Navigation Menu (Desktop + Mobile) -->
+        <!-- Navigation Menu (Desktop + Mobile) - Mobile version has dedicated close button at top right -->
         <div class="nav-menu" id="navMenu">
             <button class="close-menu" id="closeMenuBtn" aria-label="Close menu">
                 <i class="fas fa-times"></i>
@@ -771,46 +799,57 @@
         }
     });
 
-    // Hamburger Menu Logic
+    // Hamburger Menu Logic - FIXED: Cancel button works independently and no collision with hamburger lines.
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const navMenu = document.getElementById('navMenu');
     const menuOverlay = document.getElementById('menuOverlay');
     const closeMenuBtn = document.getElementById('closeMenuBtn');
 
     function openMenu() {
-        navMenu.classList.add('active');
-        menuOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        if (navMenu && menuOverlay) {
+            navMenu.classList.add('active');
+            menuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
     }
 
     function closeMenu() {
-        navMenu.classList.remove('active');
-        menuOverlay.classList.remove('active');
-        document.body.style.overflow = '';
+        if (navMenu && menuOverlay) {
+            navMenu.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     }
 
     if (hamburgerBtn) {
-        hamburgerBtn.addEventListener('click', openMenu);
+        hamburgerBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openMenu();
+        });
     }
+    
     if (closeMenuBtn) {
-        closeMenuBtn.addEventListener('click', closeMenu);
+        closeMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeMenu();
+        });
     }
+    
     if (menuOverlay) {
         menuOverlay.addEventListener('click', closeMenu);
     }
 
-    // Close menu when a nav link is clicked (smooth scroll + close for same-page anchors)
+    // Close menu when any nav link is clicked (ensures smooth navigation)
     const navLinks = document.querySelectorAll('.nav-menu nav a');
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            const href = link.getAttribute('href');
-            // Close menu first
+            // Close mobile menu immediately when a link is clicked for better UX
             closeMenu();
             
-            // For external page links (like index.html, services.html), let them navigate naturally
-            // No need to prevent default for absolute/relative page links
+            // For external page navigation we don't prevent default, just close menu
+            const href = link.getAttribute('href');
             if (href && (href.includes('.html') || href === '/' || href === '')) {
-                // Allow normal navigation
+                // Allow default navigation; menu is already closed
                 return;
             }
             
@@ -821,7 +860,7 @@
                 if (targetElement) {
                     setTimeout(() => {
                         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }, 100);
+                    }, 150);
                 }
             }
             
@@ -831,7 +870,7 @@
         });
     });
 
-    // Ensure active class is set for current page (About page)
+    // Set active class based on current page (About page detection)
     const currentPath = window.location.pathname;
     navLinks.forEach(link => {
         const href = link.getAttribute('href');
@@ -839,6 +878,13 @@
             link.classList.add('active');
         } else if (href === 'about.html' && currentPath.includes('about')) {
             link.classList.add('active');
+        }
+    });
+    
+    // Additional safety: prevent body scroll when menu is open
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 880 && navMenu && navMenu.classList.contains('active')) {
+            closeMenu();
         }
     });
 </script>
